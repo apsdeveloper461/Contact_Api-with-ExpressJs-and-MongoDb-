@@ -1,0 +1,22 @@
+{
+  "name": "my_contact_api",
+  "version": "1.0.0",
+  "description": "Express project to handle Api of my contact app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Mehboob Alam",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.1.2",
+    "nodemon": "^3.0.3"
+  }
+}
