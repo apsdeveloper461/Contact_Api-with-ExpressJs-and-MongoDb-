@@ -3,6 +3,11 @@ const mongoose=require('mongoose');
 
 
 const ContactSchema=mongoose.Schema({
+    user_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"aps_users"
+       },
     name: {
         type: String,
         required:[true,"Please enter the name"]

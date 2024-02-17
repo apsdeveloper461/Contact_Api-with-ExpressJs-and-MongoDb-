@@ -41,7 +41,29 @@ const registerUser = asyncHandler(async (req,res)=>{
 // @route POST /api/user/login
 // @access public
 const loginUser = asyncHandler(async (req,res)=>{
-    res.json({message:"LogIn a User"});
+    const {email,password}=req.body;
+    if(!email || !password){
+        res.status(400)
+        throw new Error("All fiels are mandatory")
+    }
+    const getUser=await userModal.findOne({email});
+    if(getUser && (await bcrypt.compare(password,getUser.password))){
+         const accessToken=jwt.sign({
+            user:{
+                username:getUser.username,
+                email:getUser.email,
+                id:getUser._id
+            }
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {expiresIn:"20m"}
+         );
+         res.json({accessToken});
+
+    }else{
+        res.status(401);
+        throw new Error("Email or Password are Invalid");
+    }
 });
 
 
@@ -49,7 +71,7 @@ const loginUser = asyncHandler(async (req,res)=>{
 // @route GET /api/user/current
 // @access private
 const currentUser = asyncHandler(async (req,res)=>{
-    res.json({message:"Current  User"});
+    res.json(req.user);
 });
 
 
